@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nour Al-Ramadan – Boutique Islamique</title>
+  <link rel="icon" type="image/svg+xml" href="favicon-lune.svg">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --dark: #0e0b1a;
+      --deep: #13102a;
+      --card-bg: #1a1535;
+      --text: #e8dfc8;
+      --accent: #6b3fa0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--dark);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ===== STARS BACKGROUND ===== */
+    .stars-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--dur, 3s) infinite ease-in-out alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.1; transform: scale(0.8); }
+      to   { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: rgba(14, 11, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .navbar-brand {
+      font-family: 'Amiri', serif;
+      font-size: 1.6rem;
+      color: var(--gold) !important;
+      letter-spacing: 1px;
+    }
+    .navbar-brand span { color: var(--gold-light); }
+    .nav-link {
+      color: var(--text) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+      padding: 0.5rem 1rem !important;
+    }
+    .nav-link:hover { color: var(--gold) !important; }
+    .navbar-toggler { border-color: var(--gold); }
+    .navbar-toggler-icon { filter: invert(1); }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1rem;
+      background: radial-gradient(ellipse at 50% 0%, rgba(107,63,160,0.35) 0%, transparent 70%),
+                  radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.15) 0%, transparent 60%);
+    }
+    .hero-moon {
+      font-size: 5rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+    .hero-arabic {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      color: var(--gold-light);
+      line-height: 1.7;
+      text-shadow: 0 0 30px rgba(201,168,76,0.5);
+      margin-bottom: 0.8rem;
+    }
+    .hero-verset {
+      font-family: 'Amiri', serif;
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: rgba(232,223,200,0.7);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .hero-title {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(232,223,200,0.75);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #0e0b1a;
+      font-weight: 600;
+      padding: 0.85rem 2.5rem;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 25px rgba(201,168,76,0.4);
+    }
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(201,168,76,0.55);
+      color: #0e0b1a;
+    }
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: #0e0b1a;
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 300px;
+    }
+    .divider hr { flex: 1; border-color: rgba(201,168,76,0.3); }
+    .divider span { color: var(--gold); font-size: 1.2rem; }
+
+    /* ===== SECTION TITLES ===== */
+    .section-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .section-title span { color: var(--gold); }
+    .section-sub {
+      color: rgba(232,223,200,0.6);
+      font-size: 0.95rem;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    /* ===== PRODUCT CARDS ===== */
+    .products-section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 0;
+      background: linear-gradient(to bottom, transparent, rgba(19,16,42,0.8), transparent);
+    }
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      height: 100%;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.3);
+      border-color: rgba(201,168,76,0.4);
+    }
+    .product-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #0e0b1a;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .product-img-wrap {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(107,63,160,0.2), rgba(201,168,76,0.1));
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.1), transparent 70%);
+    }
+    .product-body { padding: 1.5rem; }
+    .product-cat {
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .product-name {
+      font-family: 'Amiri', serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+    .product-desc {
+      font-size: 0.82rem;
+      color: rgba(232,223,200,0.6);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .product-stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem; }
+    .btn-amazon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #ff9900, #ffb347);
+      color: #111;
+      border: none;
+      border-radius: 10px;
+      padding: 0.65rem 1.2rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .btn-amazon:hover {
+      transform: scale(1.03);
+      box-shadow: 0 5px 20px rgba(255,153,0,0.4);
+      color: #111;
+    }
+
+    /* ===== FEATURES ===== */
+    .features-section {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 0;
+    }
+    .feature-item {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: rgba(26,21,53,0.6);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 16px;
+      height: 100%;
+      transition: border-color 0.3s;
+    }
+    .feature-item:hover { border-color: rgba(201,168,76,0.3); }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .feature-title {
+      font-family: 'Amiri', serif;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .feature-text {
+      font-size: 0.83rem;
+      color: rgba(232,223,200,0.55);
+      line-height: 1.7;
+    }
+
+    /* ===== QUOTE SECTION ===== */
+    .quote-section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 1rem;
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(107,63,160,0.2) 0%, transparent 70%);
+    }
+    .quote-text {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--gold-light);
+      line-height: 1.9;
+      max-width: 700px;
+      margin: 0 auto 1rem;
+      text-shadow: 0 0 40px rgba(201,168,76,0.3);
+    }
+    .quote-ref {
+      font-size: 0.85rem;
+      color: rgba(232,223,200,0.45);
+      letter-spacing: 1px;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter-section {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1rem;
+    }
+    .newsletter-box {
+      background: linear-gradient(135deg, rgba(107,63,160,0.3), rgba(201,168,76,0.1));
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .newsletter-box input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: #fff;
+      border-radius: 50px;
+      padding: 0.8rem 1.5rem;
+      font-size: 0.95rem;
+      width: 100%;
+      max-width: 360px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-box input::placeholder { color: rgba(255,255,255,0.35); }
+    .newsletter-box input:focus { border-color: var(--gold); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: rgba(10,8,20,0.95);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 2.5rem 0 1.5rem;
+      text-align: center;
+    }
+    footer .footer-brand {
+      font-family: 'Amiri', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+    footer p {
+      color: rgba(232,223,200,0.4);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ===== SCROLL TOP ===== */
+    #scrollTop {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #0e0b1a;
+      border-radius: 50%;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+      transition: transform 0.2s;
+    }
+    #scrollTop:hover { transform: scale(1.1); }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 576px) {
+      .hero { min-height: 80vh; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Stars background -->
+<div class="stars-bg" id="starsContainer"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">🌙 <span>Nour</span> Al-Ramadan</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="#produits">🛍️ Produits</a></li>
+        <li class="nav-item"><a class="nav-link" href="#avantages">✨ Avantages</a></li>
+        <li class="nav-item"><a class="nav-link" href="#inspiration">📿 Inspiration</a></li>
+        <li class="nav-item"><a class="nav-link" href="#newsletter">📬 Alertes</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-moon">🌙</span>
+    <p class="hero-arabic">رَمَضَانُ شَهْرٌ مُبَارَكٌ — كَتَبَ اللَّهُ عَلَيْكُمْ صِيَامَهُ</p>
+    <p class="hero-verset">"Le Ramadan est un mois béni — Allah vous a prescrit de le jeûner." — (Coran 2:185)</p>
+    <h1 class="hero-title">La Boutique du<br/><span>Ramadan Béni</span></h1>
+    <p class="hero-subtitle">Vivez ce mois sacré avec piété, sérénité et élégance. Découvrez notre sélection de produits islamiques pensés pour votre dévotion.</p>
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+      <a href="#produits" class="btn-gold btn">Découvrir les Produits</a>
+      <a href="#inspiration" class="btn-outline-gold btn">Notre Mission</a>
+    </div>
+    <div class="divider mt-4">
+      <hr/><span>☪</span><hr/>
+    </div>
+    <div class="row g-3 mt-1 justify-content-center">
+      <div class="col-auto">
+        <small class="text-gold" style="color:var(--gold)"><i class="fas fa-check-circle me-1"></i>Produits 100% Halal</small>
+      </div>
+      <div class="col-auto">
+        <small style="color:var(--gold)"><i class="fas fa-check-circle me-1"></i>Livraison Amazon</small>
+      </div>
+      <div class="col-auto">
+        <small style="color:var(--gold)"><i class="fas fa-check-circle me-1"></i>Sélection curatée</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="products-section" id="produits">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-badge">🛍️ Notre Sélection</span>
+      <h2 class="section-title">Produits pour le <span>Ramadan</span></h2>
+      <p class="section-sub">Chaque produit est choisi avec soin pour vous accompagner dans votre dévotion pendant ce mois béni.</p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Produit 1 -->
+      <div class="col-md-6 col-lg-4 fade-up">
+        <div class="product-card">
+          <span class="product-badge">⭐ Populaire</span>
+          <div class="product-img-wrap">
+            <img src="Media/_Abaya Homme À Manches Longues Caftan Marocaine.jpg" alt="Abaya Homme À Manches Longues Caftan Marocaine"></div>
+          <div class="product-body">
+            <p class="product-cat">Homme</p>
+            <h5 class="product-name">Qamis / Robe de Prière Homme</h5>
+            <p class="product-desc">Vêtement traditionnel en coton léger, parfait pour la prière et les soirées du Tarawih. Confort, dignité et élégance réunis.</p>
+            <div class="product-stars">★★★★★ <small class="ms-1" style="color:rgba(232,223,200,0.5)">4.8/5</small></div>
+            <a href="https://www.amazon.fr/Kelandoom-Marocaine-Musulmane-V%C3%AAtements-Islamique/dp/B0GPVW2KK9?dib=eyJ2IjoiMSJ9.xfDqJRrZERQ70UlvjjZJecIQvHppHK7GUHZ0Y41bf8F2QMqSVcj1n1MgYOZM3hP6iJ1wiSsHJLKDSBscY8ez9wSnm9Vp-_aONX4QeLGv1c5LgFhymRvRpz612IJoTKTU47_sOaU9OJmGZlJvKxflVuqM78ua7M953MlPM68HA2gRXVhv-OEG0LtzhRo0iWNsxueq1StdFUbMeyhKXvxepTVT7Y469cd83e4EV9P3tlrjNbxofwmnxN5pbxj7jzmL9NGtT_HFdX2aoUdgOaPAeity3opAwugNi5B7VZIzDnE.GoItKkHexrFwcKyL4M_6zYjk9YSaA1jaWSyx4Mh4bUU&dib_tag=se&keywords=qamis%2Bhomme%2Bpriere&qid=1772190329&sr=8-8&th=1&psc=1&linkCode=ll2&tag=disciplinefoo-21&linkId=3e29eff01238ba127f831f6229612768&ref_=as_li_ss_tl" target="_blank" class="btn-amazon">
+              <i class="fab fa-amazon"></i> Voir sur Amazon
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 2 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="transition-delay:0.1s">
+        <div class="product-card">
+          <span class="product-badge">💎 Bestseller</span>
+          <div class="product-img-wrap">
+            <img src="Media/Robe de Prière avec Hijab Intégré.jpg" alt="Robe de Prière avec Hijab Intégré"></div>
+          <div class="product-body">
+            <p class="product-cat">Femme</p>
+            <h5 class="product-name">Robe de Prière avec Hijab Intégré</h5>
+            <p class="product-desc">Tenue complète et couvrante pour les femmes. Tissu respirant, coupe ample, idéale pour les longues nuits de prière.</p>
+            <div class="product-stars">★★★★★ <small class="ms-1" style="color:rgba(232,223,200,0.5)">4.9/5</small></div>
+            <a href="https://www.amazon.fr/Fulbant-pri%C3%A8re-musulmane-capuche-Coffee/dp/B0F89R8X2D?dib=eyJ2IjoiMSJ9.ey5cYJux1djaejJF7LQ1us_jwkBV-3eZtg5LkEIwNlWNOxlF7y1essQegTfvY832fSw_4nyMuJGvdyxs3YkIylsbpX2cLbpnj0dznEFRQyTwqQgJKSSmd_YVau6c47AnaLeajEw8tTvaKF6sBLVebr8MqbqUO2ZAnEK1tYnRzJXlj-JtlJTIazhXCOXcwcpHZk9xdlMU9ndurn6LLeDuO833_mBvI6I7pS-QHsqkPS9h_cUfW4OCUiHoz0NDBNd1vkMNv7cbTfZKi87ww2S9V0qI7B_ykYomCgdhlhMg4iQ.nQF0G5Ci0oD26qfEDrM4UahRXXPgZpfa0tyH0p-UO48&dib_tag=se&keywords=robe%2Bpriere%2Bfemme%2Bhijab&qid=1772192407&sr=8-30&th=1&psc=1&linkCode=ll2&tag=disciplinefoo-21&linkId=e974c52d0b81c7abff326faf48d22e54&ref_=as_li_ss_tl" target="_blank" class="btn-amazon">
+              <i class="fab fa-amazon"></i> Voir sur Amazon
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 3 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="transition-delay:0.2s">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="Media/Tapis de Prière avec Perles de Tasbih.jpg" alt="Tapis de Prière avec Perles de Tasbih"></div>
+          <div class="product-body">
+            <p class="product-cat">Prière</p>
+            <h5 class="product-name">Tapis de Prière avec Perles de Tasbih</h5>
+            <p class="product-desc">Un ensemble complet — tapis épais et confortable avec chapelet intégré. Parfait pour les longues soirées de dévotion du Ramadan.</p>
+            <div class="product-stars">★★★★☆ <small class="ms-1" style="color:rgba(232,223,200,0.5)">4.6/5</small></div>
+            <a href="https://www.amazon.fr/Imani-Aksa-Musulman-Saint-muuslman-Islam-Ramadan/dp/B0DPCPJ2BH?dib=eyJ2IjoiMSJ9.TzjAGxTPjMQUJfnImQuexz5eeRu51LJFTTP1mTPwksV3CS0XaopeAzM1KCOtKFXwetu3xX9EI3LlhTfwP9lrr09lH4EHbRL9jK4JES3kggR7DeH8HVf2-c5J4m0bLpIV5U0B9726f0GS6QHjKX-Bl-c3U0KEjPf17mzgoO_HXSYbpBa7Z9CF8AewGuQz3SpAqWOYJ7eahOPHdLLvess_U1XjoiOq4eiyiYUmzmOdrpo5ux7EIZ94A8LqfNLmCKdOjO7p2aFHNcnrAjtbyJY9O3Wk4-ja7vZ_m0oY6MH4olw.6vC1pVMti_bi4G9_Rkr4ab_PrDrYJkRnXkScQ8AyV1c&dib_tag=se&keywords=tapis%2Bpriere%2Bmusulman%2Bperles&qid=1772192924&sr=8-19&th=1&linkCode=ll2&tag=disciplinefoo-21&linkId=82c04156eb0c9770af36c4632d6e23f9&ref_=as_li_ss_tl" target="_blank" class="btn-amazon">
+              <i class="fab fa-amazon"></i> Voir sur Amazon
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 4 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="transition-delay:0.3s">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="Media/Chapelet Islamique Tasbih 99 Perles.jpg" alt="Chapelet Islamique Tasbih 99 Perles"></div>
+          <div class="product-body">
+            <p class="product-cat">Dhikr</p>
+            <h5 class="product-name">Chapelet Islamique Tasbih 99 Perles</h5>
+            <p class="product-desc">Favorisez le dhikr et le rappel d'Allah avec ce chapelet artisanal. Perles en bois naturel, robuste et élégant.</p>
+            <div class="product-stars">★★★★★ <small class="ms-1" style="color:rgba(232,223,200,0.5)">4.7/5</small></div>
+            <a href="https://www.amazon.fr/ALBATROSART-Collection-antique-Tesbih-Tasbih-Tasbeeh-Misbaha-Masbaha-Subha-Sebha-Sibha-Chapelet/dp/B082GJKD86?dib=eyJ2IjoiMSJ9.hWwiodFv_B6ANUQOkY3pGA82pRQytzfnd-q50EZxF3q7CvmWFxSavLBvdEeS868N13mNyy9Q_phaOl4yxrzfVUPJpJmGR8rGts13N3M-VwtUfTIahmLxZ6r7hvkN0FUyi40b9t0xdwCzp19Rnux2FiadANUb9G_SG7RDvoA3f3AlUpQy5KhPSuqAcT7q2ctX3iz3GZ8C7gJodtSROhZ9v8GDOBDerzXIGxmlgXbihhZLhgEzJg-oeOqVdliI1atAOJ9GPhz7KkN65pOgQxDMQ1cu9iMgMNPTPhNZjni7X0g.C0Gw4DSLPlXsjiU1Gisec7xDHE0yk8DnQYHcA45_eio&dib_tag=se&keywords=tasbih+chapelet+islamique+99&qid=1772193296&sr=8-3&linkCode=ll2&tag=disciplinefoo-21&linkId=6e6d06f60da083038d3002fbe7968d21&ref_=as_li_ss_tl" target="_blank" class="btn-amazon">
+              <i class="fab fa-amazon"></i> Voir sur Amazon
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 5 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="transition-delay:0.4s">
+        <div class="product-card">
+          <span class="product-badge">🌿 Halal</span>
+          <div class="product-img-wrap">
+            <img src="Media/Parfum Arabe Sans Alcool — Oud & Musk.jpg" alt="Parfum Arabe Sans Alcool — Oud & Musk"></div>
+          <div class="product-body">
+            <p class="product-cat">Parfum</p>
+            <h5 class="product-name">Parfum Arabe Sans Alcool — Oud & Musk</h5>
+            <p class="product-desc">Senteur orientale raffinée, conforme aux enseignements islamiques. Idéal avant la prière, les sorties et les réunions familiales.</p>
+            <div class="product-stars">★★★★★ <small class="ms-1" style="color:rgba(232,223,200,0.5)">4.8/5</small></div>
+            <a href="https://www.amazon.fr/Arabian-Oud-NOBLES-dagrumes-oriental/dp/B0D385RSCW?dib=eyJ2IjoiMSJ9.T6XSRV3Qn_HUsoIrvpPFbwW3dGkoDuJpAlqcS_3X29pRCKP_N-lr2jywgCBKjC6v4xndrpFwFALYSKye4cbKlBuYOBBamJ9dIB1TnM1vd3P_kIaSJ4Kv120HPCploWk8eDSsMD8mSOnroTsGsCr4Tg9lzz4D576bBqyXcgBLmtrt3OTs9nq_gGsdeTiAehVn7z01ymiSWpazmX6YhavAR4ukSCW-fIefau2zEXLVFpVNSGqsZt34Va_2iM_x2snnMgN62H7lUzPWO7KKY2UEVsYvOnAMoJr9TWzMZGeXT64.l-A2q5WVC1-V4OiyhUJi6F_brbZmso6wqk43JlcoleU&dib_tag=se&keywords=parfum+arabe+sans+alcool+oud&qid=1772193766&sr=8-7&linkCode=ll2&tag=disciplinefoo-21&linkId=dc881fb53ac4da5023b3a4c21da4158a&ref_=as_li_ss_tl" target="_blank" class="btn-amazon">
+              <i class="fab fa-amazon"></i> Voir sur Amazon
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 6 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="transition-delay:0.5s">
+        <div class="product-card">
+          <span class="product-badge">🎁 Aïd</span>
+          <div class="product-img-wrap">
+            <img src="Media/Coffret Cadeau Islamique — Ramadan & Aïd.jpg" alt="Coffret Cadeau Islamique — Ramadan & Aïd"></div>
+          <div class="product-body">
+            <p class="product-cat">Cadeaux</p>
+            <h5 class="product-name">Coffret Cadeau Islamique — Ramadan & Aïd</h5>
+            <p class="product-desc">Coffret luxueux : tapis, chapelet, parfum et boîte Coran. Le cadeau idéal pour vos proches à l'Aïd el-Fitr.</p>
+            <div class="product-stars">★★★★★ <small class="ms-1" style="color:rgba(232,223,200,0.5)">5.0/5</small></div>
+            <a href="https://www.amazon.fr/ihvan-online-Ensemble-musulmane-islamique/dp/B0DFQTNMCG?dib=eyJ2IjoiMSJ9.B0wtWFvhcNpfoG03F_RRcQMm7x-D7r0hlGZ3W4iHFlY-N09pGIUBrX67ADvNkosYsB7jzPBmZ1ZZOv1JaaOzYaBs_KLoY49jlo3NsvQhyg955eVUucKnJbj4JtLXGMJoZqCPNKnO0dbGYB6RCSYxx8ev-Dykt1hOcPGbbYYyveL5T4IZkXHSYmNE5AMvzGR0RGCRF3csqfhL4bBuPHqWCltGjlgdDDgCL7oYZX05HBncHlyzTwd_96AMH2Zb2RRmsogPQRjlQrH-HWEkp2dUCiDHWwFEIvqsJHFFPkHWL_k.JGZX-gLRqEDO8VcnZlxdhri91IAYdRY6oHbIeZy-L7U&dib_tag=se&keywords=coffret%2Bcadeau%2Bislamique%2Bramadan&qid=1772194075&sr=8-2&th=1&linkCode=ll2&tag=disciplinefoo-21&linkId=404e9cb4a3e3d101a8df0f7ca152123b&ref_=as_li_ss_tl" target="_blank" class="btn-amazon">
+              <i class="fab fa-amazon"></i> Voir sur Amazon
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTE ===== -->
+<section class="quote-section" id="inspiration">
+  <div class="container">
+    <div class="divider"><hr/><span>🌙</span><hr/></div>
+    <blockquote class="quote-text">
+      « Ô vous qui croyez ! On vous a prescrit le jeûne comme on l'a prescrit à ceux qui vous ont précédés — ainsi atteindrez-vous la piété. »
+    </blockquote>
+    <p class="quote-ref">— Sourate Al-Baqara (2:183) — Le Saint Coran</p>
+    <div class="divider"><hr/><span>☪</span><hr/></div>
+    <p style="max-width:620px;margin:0 auto;color:rgba(232,223,200,0.6);font-size:0.95rem;line-height:1.9">
+      Le Ramadan est bien plus qu'un mois de jeûne. C'est une période de purification, de reconnexion avec Allah et de transformation intérieure. Notre boutique vous accompagne dans cette belle démarche spirituelle avec des produits authentiques et de qualité.
+    </p>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features-section" id="avantages">
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="section-badge">✨ Pourquoi Nous</span>
+      <h2 class="section-title">Des produits <span>choisis avec soin</span></h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 fade-up">
+        <div class="feature-item">
+          <span class="feature-icon">🌿</span>
+          <h6 class="feature-title">100% Halal</h6>
+          <p class="feature-text">Chaque produit respecte les préceptes islamiques — aucun alcool, aucun composant interdit.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 fade-up" style="transition-delay:0.1s">
+        <div class="feature-item">
+          <span class="feature-icon">📦</span>
+          <h6 class="feature-title">Livraison Amazon</h6>
+          <p class="feature-text">Commandez en toute sécurité via Amazon. Livraison rapide, retours faciles, paiement sécurisé.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 fade-up" style="transition-delay:0.2s">
+        <div class="feature-item">
+          <span class="feature-icon">🤲</span>
+          <h6 class="feature-title">Sélection Spirituelle</h6>
+          <p class="feature-text">Nos produits sont choisis pour vous rapprocher d'Allah et enrichir votre dévotion quotidienne.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 fade-up" style="transition-delay:0.3s">
+        <div class="feature-item">
+          <span class="feature-icon">🎁</span>
+          <h6 class="feature-title">Idées Cadeaux Aïd</h6>
+          <p class="feature-text">Offrez des cadeaux islamiques significatifs pour l'Aïd el-Fitr et les occasions spéciales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="newsletter-box fade-up">
+      <span style="font-size:2.5rem">📬</span>
+      <h3 class="section-title mt-2">Recevez nos <span>Offres Ramadan</span></h3>
+      <p class="section-sub mb-3">Soyez alerté(e) des meilleures offres islamiques, des nouvelles collections et des promotions de l'Aïd.</p>
+      <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center align-items-center">
+        <input type="email" placeholder="tohouegnongeraud0@gmail.com"/>
+        <button class="btn-gold btn px-4">Je m'inscris 🌙</button>
+      </div>
+      <p style="font-size:0.75rem;color:rgba(232,223,200,0.3);margin-top:1rem">Pas de spam. Désinscription libre à tout moment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">🌙 Nour Al-Ramadan</div>
+    <p>En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.</p>
+    <p class="mt-2">© 2025 Nour Al-Ramadan — <a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></p>
+  </div>
+</footer>
+
+<!-- Scroll Top -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ===== STARS =====
+  const container = document.getElementById('starsContainer');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      --dur:${(Math.random()*3+2).toFixed(1)}s;
+      animation-delay:${(Math.random()*4).toFixed(1)}s;
+    `;
+    container.appendChild(s);
+  }
+
+  // ===== SCROLL TOP =====
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  });
+
+  // ===== FADE UP ON SCROLL =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
